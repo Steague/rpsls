@@ -27,7 +27,7 @@ class RockPaperScissorsLizardSpock
 
     /**
      * Gets the _thorw() result and gives human readable results. Then asks the
-     * user if they want to play agian.
+     * user if they want to play again.
      * 
      * @return void
      */
@@ -93,7 +93,7 @@ class RockPaperScissorsLizardSpock
 
     /**
      * Sets both the player and the computer's moves and compares the results.
-     * The returned result is one fo the constant game states.
+     * The returned result is one from the constant game states.
      * 
      * @return self::DRAW | self::LOSE | self::WIN
      */
@@ -146,7 +146,7 @@ class RockPaperScissorsLizardSpock
      * Supports Windows and *nix.
      * 
      * @param $prompt  String  A prompt to be given to the user before the input is taken.
-     * @param $newLine Boolean Whether or not to add a "\n" afte rthe prompt.
+     * @param $newLine Boolean Whether or not to add a "\n" after the prompt.
      * @return         String  The input line given by the user.
      */
     private function _getLine($prompt, $newLine = false)
