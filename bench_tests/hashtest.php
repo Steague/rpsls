@@ -54,8 +54,25 @@ $outcomes2 = array(
 	"0345236e1dde1616239bb94198a6b8d7" => 2
 );
 
-$moves = array("Rock", "Paper", "Scissors", "Lizard", "Spock");
+$outcomes3 = array(
+	"Rock|Rock"         => 2,
+	"Rock|Paper"        => 0,
+	"Rock|Spock"        => 0,
+	"Paper|Paper"       => 2,
+	"Paper|Scissors"    => 0,
+	"Paper|Lizard"      => 0,
+	"Scissors|Rock"     => 0,
+	"Scissors|Scissors" => 2,
+	"Scissors|Spock"    => 0,
+	"Lizard|Rock"       => 0,
+	"Lizard|Scissors"   => 0,
+	"Lizard|Lizard"     => 2,
+	"Spock|Paper"       => 0,
+	"Spock|Lizard"      => 0,
+	"Spock|Spock"       => 2
+);
 
+$moves = array("Rock", "Paper", "Scissors", "Lizard", "Spock");
 
 $time_start = microtime_float();
 for ($i = 0; $i < $tests; $i++)
@@ -77,8 +94,6 @@ $time = $time_end - $time_start;
 
 echo "\nTested multi-dimensional array in ".$time." seconds\n";
 
-echo "\n";
-
 $time_start = microtime_float();
 for ($i = 0; $i < $tests; $i++)
 {
@@ -87,7 +102,7 @@ for ($i = 0; $i < $tests; $i++)
 
 	$outcomeHash = md5($myMove."|".$computerMove);
 
-	if (!in_array($outcomeHash,array_keys($outcomes2)))
+	if (!array_key_exists($outcomeHash, $outcomes2))
 	{
 		//echo "1 ";
 	}
@@ -102,7 +117,28 @@ $time = $time_end - $time_start;
 
 echo "\nTested hash map in ".$time." seconds\n";
 
-echo "\n";
+$time_start = microtime_float();
+for ($i = 0; $i < $tests; $i++)
+{
+	$myMove = "Rock";
+	$computerMove = $moves[array_rand($moves)];
+
+	$outcomeHash = $myMove."|".$computerMove;
+
+	if (!array_key_exists($outcomeHash, $outcomes3))
+	{
+		//echo "1 ";
+	}
+	else
+	{
+		//echo $outcomes2[$outcomeHash]." ";
+	}
+
+}
+$time_end = microtime_float();
+$time = $time_end - $time_start;
+
+echo "\nTested simple hash map in ".$time." seconds\n";
 
 $time_start = microtime_float();
 for ($i = 0; $i < $tests; $i++)
@@ -129,4 +165,4 @@ for ($i = 0; $i < $tests; $i++)
 $time_end = microtime_float();
 $time = $time_end - $time_start;
 
-echo "\nTested if statements array in ".$time." seconds\n";
+echo "\nTested switch/case statements array in ".$time." seconds\n";
