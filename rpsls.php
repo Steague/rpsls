@@ -8,44 +8,7 @@ class RockPaperScissorsLizardSpock
 
      // All possible choices.
     private $_moves = array("Rock", "Paper", "Scissors", "Lizard", "Spock");
-    // All possible outcomes.
-    private $_outcomes = array(
-        "Rock" => array(
-            "Rock"     => self::DRAW,
-            "Paper"    => self::LOSE,
-            "Scissors" => self::WIN,
-            "Lizard"   => self::WIN,
-            "Spock"    => self::LOSE
-        ),
-        "Paper"    => array(
-            "Rock"     => self::WIN,
-            "Paper"    => self::DRAW,
-            "Scissors" => self::LOSE,
-            "Lizard"   => self::LOSE,
-            "Spock"    => self::WIN
-        ),
-        "Scissors" => array(
-            "Rock"     => self::LOSE,
-            "Paper"    => self::WIN,
-            "Scissors" => self::DRAW,
-            "Lizard"   => self::WIN,
-            "Spock"    => self::LOSE
-        ),
-        "Lizard"   => array(
-            "Rock"     => self::LOSE,
-            "Paper"    => self::WIN,
-            "Scissors" => self::LOSE,
-            "Lizard"   => self::DRAW,
-            "Spock"    => self::WIN
-        ),
-        "Spock"    => array(
-            "Rock"     => self::WIN,
-            "Paper"    => self::LOSE,
-            "Scissors" => self::WIN,
-            "Lizard"   => self::LOSE,
-            "Spock"    => self::DRAW
-        )
-    );
+
     private $_myMove = null;
     private $_computerMove = null;
 
@@ -58,8 +21,6 @@ class RockPaperScissorsLizardSpock
     {
         echo "Enter your choice. Rock, Paper, Scissors, Lizard or Spock.\n";
         echo "Enter quit or anything else to exit the game.\n";
-
-        
 
         return;
     }
@@ -143,7 +104,19 @@ class RockPaperScissorsLizardSpock
 
         echo "I played: ".$this->_computerMove."\n";
 
-        return $this->_outcomes[$this->_myMove][$this->_computerMove];
+        switch (true)
+        {
+            case ($this->_myMove == $this->_computerMove):
+                return self::DRAW;
+            case ($this->_myMove == "Rock"     && ($this->_computerMove == "Paper"    || $this->_computerMove == "Spock")):
+            case ($this->_myMove == "Paper"    && ($this->_computerMove == "Scissors" || $this->_computerMove == "Lizard")):
+            case ($this->_myMove == "Scissors" && ($this->_computerMove == "Rock"     || $this->_computerMove == "Spock")):
+            case ($this->_myMove == "Lizard"   && ($this->_computerMove == "Rock"     || $this->_computerMove == "Scissors")):
+            case ($this->_myMove == "Spock"    && ($this->_computerMove == "Lizard"   || $this->_computerMove == "Paper")):
+                return self::LOSE;
+            default:
+                return self::WIN;
+        }
     }
 
     /**
